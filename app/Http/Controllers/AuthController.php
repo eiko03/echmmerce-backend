@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -28,10 +30,10 @@ class AuthController extends Controller
     }
 
 
-    public function register(Request $request) {
+    public function register(RegisterRequest $request) {
 
         $user = User::create(array_merge(
-            $request,
+            $request->toArray(),
             ['password' => bcrypt($request->password)]
         ));
 
