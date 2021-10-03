@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,9 @@ Route::group(['prefix' => 'auth'],function () {
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
 });
-Route::group(['prefix' => 'admin','middleware' => ['assign.guard:admins','jwt.auth']],function () {
+Route::group(['middleware' => ['jwt.auth']],function () {
+    Route::get('/product',[ProductController::class,'index']);
+});
+Route::group(['prefix' => 'admin','middleware' => ['assign.guard:admins','jwt.auth','jwt.refresh']],function () {
 //    Route::get('/demo','AdminController@demo');
 });

@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
-
-
+use App\Rules\CheckIfUserExistsRule;
 
 
 class AuthController extends Controller
@@ -17,9 +16,12 @@ class AuthController extends Controller
 
 
     public function login(LoginRequest $request){
+        $request->validate([
+           'email'=>new CheckIfUserExistsRule()
+        ]);
 
-        if (! $token = auth()->attempt($request)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        if (! $token = auth('user')->attempt($request->toArray()) ) {
+            return response()->json(['error' => 'Email or Password is wrong'], 401);
         }
 
         return $this->createNewToken($token);
