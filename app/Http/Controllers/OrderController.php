@@ -11,9 +11,10 @@ class OrderController extends Controller
 {
     public function store(CreateOrderRequest $request){
         $time=now()->timestamp;
-        foreach ( $request->get("orders") as $order)
-            $order['order_history_id']=$time;
-        Auth::user()->user_orders()->createMany($request->get("orders"));
+        foreach ( $orders=$request->get("orders") as $key=>$value)
+            $orders[$key]['order_history_id']=$time;
+        Auth::user()->user_orders()->createMany($orders);
+        return response()->json($orders);
     }
 
 }

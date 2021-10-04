@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderHistory extends Model
 {
-    protected $fillable=['product_id','order_history_id'];
+    protected $fillable=['product_id','order_history_id','qty'];
     use HasFactory;
 
     public function orders(){
