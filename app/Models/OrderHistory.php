@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderHistory extends Model
 {
+    protected $fillable=['product_id','order_history_id'];
     use HasFactory;
 
     public function orders(){
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\Models\User','orders','order_id','user_id');
     }
 
     public function products(){
-        return $this->hasMany('App\Product');
+        return $this->hasMany('App\Models\Product');
     }
 }

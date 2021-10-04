@@ -11,12 +11,24 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
+    private function sort_products($products,$request){
+          return ($request->has('sort_by'))
+             ?  $products->OrderBy('price',$request->query('sort_by'))
+             :  $products;
+
+    }
+
+    private function search_products($products,$request){
+        return ($request->has('search_by'))
+            ?  $products->search($request->query('search_by'))
+            :  $products;
+
+    }
+
     public function index(GetProductsRequest $request){
         $products=new Product;
-        if ($request->has('sort_by'))
-            $products=$products::OrderBy('price',$request->query('sort_by'));
-        if ($request->has('search_by'))
-            $products->search($request->query('search_by'));
+        $products=$this->sort_products($products,$request);
+        $products=$this->search_products($products,$request);
         return new ProductCollection($products->paginate(10));
     }
 

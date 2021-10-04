@@ -15,8 +15,9 @@ class CreateOrderHistoriesTable extends Migration
     {
         Schema::create('order_histories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('order_id');
+            $table->unsignedBigInteger('order_history_id');
             $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('qty');
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@ class Product extends Model
     ];
 
     public function product_orders(){
-        return $this->belongsToMany('App\OrderHistory');
+        return $this->belongsToMany('App\Models\OrderHistory','orders');
     }
 
 }

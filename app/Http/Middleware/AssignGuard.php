@@ -13,6 +13,7 @@ class AssignGuard
 
         if($guard != null)
             auth()->shouldUse($guard);
+        else return response()->json(["message"=>"Unauthorized"]);
         return $next($request);
 
     }
