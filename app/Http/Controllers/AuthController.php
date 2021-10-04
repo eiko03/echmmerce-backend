@@ -20,7 +20,7 @@ class AuthController extends Controller
            'email'=>new CheckIfUserExistsRule()
         ]);
 
-        if (! $token = auth('user')->attempt($request->toArray()) ) {
+        if (! $token = auth('user')->attempt($request->all()) and ! $token = auth('admin')->attempt($request->all())) {
             return response()->json(['error' => 'Email or Password is wrong'], 401);
         }
 
@@ -63,7 +63,7 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => auth()->user()
+            'user' => is_null(auth()->user()) ? auth()->guard('admin')->user():auth()->user()
         ]);
     }
 

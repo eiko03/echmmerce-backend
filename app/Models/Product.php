@@ -18,4 +18,8 @@ class Product extends Model
         ]
     ];
 
+    public function product_orders(){
+        return $this->belongsToMany('App\OrderHistory');
+    }
+
 }
