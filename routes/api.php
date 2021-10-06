@@ -29,12 +29,13 @@ Route::group(['prefix' => 'product','name'=>'product.'],function () {
     });
 });
 
-Route::group(['prefix' => 'order','name'=>'order.','middleware' => ['assign.guard:user', 'jwt.auth']],function () {
+Route::group(['prefix' => 'order','name'=>'order.','middleware' => ['jwt.auth']],function () {
 
     Route::get('/', [OrderController::class, 'index'])->name('index');
     Route::get('/{OrderId}', [OrderController::class, 'show'])->name('show');
     Route::delete('/{OrderId}', [OrderController::class, 'destroy'])->name('destroy');
     Route::post('/', [OrderController::class, 'store'])->name('store');
     Route::put('/{OrderId}', [OrderController::class, 'update'])->name('update');
+    Route::post('/reject', [OrderController::class, 'reject'])->name('reject');
 
 });

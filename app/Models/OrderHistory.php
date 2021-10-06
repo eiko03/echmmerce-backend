@@ -14,7 +14,11 @@ class OrderHistory extends Model
         return $this->belongsToMany('App\Models\User','orders','order_id','user_id');
     }
 
+    public function order_status(){
+        return $this->hasMany('App\Models\Order','order_id');
+    }
+
     public function products(){
-        return $this->hasMany('App\Models\Product');
+        return $this->belongsTo(Product::class,'product_id','id');
     }
 }
