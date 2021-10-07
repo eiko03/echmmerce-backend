@@ -31,7 +31,7 @@ class OrderController extends Controller
     }
 
     public function show_history($OrderId){
-        $order_histories=OrderHistory::where([['edit_level','>',0],['order_history_id',$OrderId]])->with('orders')->with('products')->get();
+        $order_histories=OrderHistory::where([['edit_level','>',0],['order_history_id',$OrderId]])->with('orders')->with('products')->get()->groupBy('edit_level');
         return response()->json($order_histories);
     }
 
