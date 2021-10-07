@@ -18,6 +18,7 @@ class CreateOrderHistoriesTable extends Migration
             $table->unsignedBigInteger('order_history_id');
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('qty');
+            $table->unsignedBigInteger('edit_level')->default(0);
             $table->timestamps();
         });
     }

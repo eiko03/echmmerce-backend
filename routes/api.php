@@ -33,9 +33,10 @@ Route::group(['prefix' => 'order','name'=>'order.','middleware' => ['jwt.auth']]
 
     Route::get('/', [OrderController::class, 'index'])->name('index');
     Route::get('/{OrderId}', [OrderController::class, 'show'])->name('show');
+    Route::get('/{OrderId}/history', [OrderController::class, 'show_history'])->name('show.history');
     Route::delete('/{OrderId}', [OrderController::class, 'destroy'])->name('destroy');
     Route::post('/', [OrderController::class, 'store'])->name('store');
     Route::put('/{OrderId}', [OrderController::class, 'update'])->name('update');
-    Route::post('/reject', [OrderController::class, 'reject'])->name('reject');
+    Route::post('{OrderId}/change_status/', [OrderController::class, 'change_status'])->name('change_status');
 
 });
