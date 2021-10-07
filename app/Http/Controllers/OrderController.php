@@ -7,7 +7,6 @@ use App\Http\Requests\Order\CreateOrderRequest;
 use App\Models\Order;
 use App\Models\OrderHistory;
 use App\Traits\OrderTrait;
-use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
