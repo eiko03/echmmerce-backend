@@ -3,7 +3,7 @@
 ```sh
 composer install --ignore-platform-reqs && cp .env.example .env && php artisan key:generate && php artisan jwt:secret
 ```
-- Generate Products
+- Generate Fake Products
 ``` 
 php artisan db:seed
 ```
