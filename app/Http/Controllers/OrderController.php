@@ -18,7 +18,29 @@ class OrderController extends Controller
     private $shipped=4;
     private $delivered=5;
 
-
+//    private function group_by($array, $key){
+//        $return = array();
+//        foreach ($array as $val)
+//            return [$val[$key]][]=$val;
+//        return $return;
+//    }
+//
+//    public function index(){
+//        $oh=OrderHistory::where('id','>',0)->pluck('order_history_id');
+//        $orders=[];
+//        $max_el=[];
+//        return response()->json($oh);
+//        foreach($oh as $ohs)
+//            $max_el[]=OrderHistory::where('order_history_id',$ohs)->max('edit_level')->pluck('edit_level');
+//
+//        foreach($max_el as $key=>$el)
+//            $orders[]=OrderHistory::where([['edit_level',$el],['order_history_id',$oh[$key]]])->with('orders')->with('products')->get()->toArray();
+//
+//
+//
+//        $order_histories=$this->group_by(orders,'order_history_id');
+//        return response()->json($order_histories);
+//    }
     public function index(){
         $order_histories=OrderHistory::with('orders')->with('products')->get()->groupBy('order_history_id');
         return response()->json($order_histories);
