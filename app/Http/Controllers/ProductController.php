@@ -28,7 +28,8 @@ class ProductController extends Controller
         $products=new Product;
         $products=$this->sort_products($products,$request);
         $products=$this->search_products($products,$request);
-        return new ProductCollection($products->paginate(10));
+        //return new ProductCollection($products->paginate(10));
+		return $products->get();
     }
 
     public function store(CreateProductRequest $request){
