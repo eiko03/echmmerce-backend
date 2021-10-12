@@ -20,7 +20,7 @@ class OrderController extends Controller
 
 
     public function index(){
-        $order_histories=OrderHistory::where('edit_level',0)->with('orders')->with('products')->get()->groupBy('order_history_id');
+        $order_histories=OrderHistory::with('orders')->with('products')->get()->groupBy('order_history_id');
         return response()->json($order_histories);
     }
 

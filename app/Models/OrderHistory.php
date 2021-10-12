@@ -11,7 +11,7 @@ class OrderHistory extends Model
     use HasFactory;
 
     public function orders(){
-        return $this->belongsToMany('App\Models\User','orders','order_id','user_id');
+        return $this->belongsToMany('App\Models\User','orders','order_id','user_id')->withPivot('status');
     }
 
     public function order_status(){
